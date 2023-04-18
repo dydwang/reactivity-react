@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { useForceUpdate } from './share';
 import { useReactivityEffect } from './effect';
 import { isFunction, isObject } from '@vue/shared';
@@ -12,14 +12,16 @@ export type StoreObj = {
 }
 export type Store = StoreFun | StoreObj;
 
+export type NormalizeStore<S extends Store> = S extends StoreObj
+  ? S['state'] & S['getters'] & S['actions']
+  : S extends StoreFun
+  ? ReturnType<S>
+  : unknown
+export type CreateStoreReturn<R extends object> = DeepReadonly<UnwrapNestedRefs<R>>
 export function createStore<
   S extends Store = Store,
-  R extends object = S extends StoreObj
-    ? S['state'] & S['getters'] & S['actions']
-    : S extends StoreFun
-      ? ReturnType<S>
-      : unknown
->(store: S): DeepReadonly<UnwrapNestedRefs<R>>{
+  R extends object = NormalizeStore<S>
+>(store: S): CreateStoreReturn<R>{
   // 标准化store
   let normalizeStore: R;
   if(isFunction(store)) {
