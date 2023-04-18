@@ -1,1 +1,1 @@
-文档请看 /package/reactivity-react/README.md
+[**文档**](https://github.com/dydwang/reactivity-react/tree/main/packages/reactivity-react) 

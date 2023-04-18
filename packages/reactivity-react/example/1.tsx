@@ -1,5 +1,4 @@
-import { setup } from '../src';
-import { reactive } from '@vue/reactivity';
+import { setup, reactive } from '../src';
 import { ForwardedRef, forwardRef } from 'react';
 
 const Child = setup(() => {

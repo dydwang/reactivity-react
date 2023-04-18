@@ -13,8 +13,7 @@ npm install reactivity-react -S
 ```
 
 ```javascript
-import { setup } from 'reactivity-react';
-import { reactive } from '@vue/reactivity';
+import { setup, reactive } from '../src';
 import { ForwardedRef, forwardRef } from 'react';
 
 const Child = setup(() => {
